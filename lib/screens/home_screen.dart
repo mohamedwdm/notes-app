@@ -7,8 +7,6 @@ class HomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(title: Text('Notes App', style: TextStyle(color: Colors.black))),
-    );
+    return Scaffold(appBar: AppBar(title: Text('Notes'), centerTitle: true));
   }
 }
