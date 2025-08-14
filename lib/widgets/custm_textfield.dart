@@ -1,8 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:notes_app/constants.dart';
 
-class CustmTextField extends StatelessWidget {
-  const CustmTextField({super.key, required this.hintText,  this.maxLine = 1});
+class CustomTextField extends StatelessWidget {
+  const CustomTextField({
+    super.key,
+    required this.hintText,
+    this.maxLine = 1,
+  });
 
   final String hintText;
   final int maxLine;
@@ -14,7 +18,7 @@ class CustmTextField extends StatelessWidget {
       cursorColor: kPrimaryColor,
       decoration: InputDecoration(
         hintText: hintText,
-        
+
         hintStyle: TextStyle(color: kPrimaryColor),
         border: buildBorder(),
         enabledBorder: buildBorder(),
