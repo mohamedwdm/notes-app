@@ -6,14 +6,24 @@ class CustomTextField extends StatelessWidget {
     super.key,
     required this.hintText,
     this.maxLine = 1,
+    this.onSaved,
   });
 
   final String hintText;
   final int maxLine;
+  final Function(String?)? onSaved;
 
   @override
   Widget build(BuildContext context) {
-    return TextField(
+    return TextFormField(
+      validator: (value) {
+        if (value?.isEmpty ?? true) {
+          return 'Field is requierd';
+        } else {
+          return null;
+        }
+      },
+      onSaved: onSaved,
       maxLines: maxLine,
       cursorColor: kPrimaryColor,
       decoration: InputDecoration(
