@@ -12,13 +12,16 @@ class NotesView extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       floatingActionButton: FloatingActionButton(
+        
         backgroundColor: kPrimaryColor,
         shape: RoundedRectangleBorder(
+          
           borderRadius: BorderRadius.circular(25),
           // keep it circular
         ),
         onPressed: () {
           showModalBottomSheet(
+            isScrollControlled: true,
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(16),
             ),
