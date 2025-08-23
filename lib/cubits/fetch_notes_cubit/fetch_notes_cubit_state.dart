@@ -6,3 +6,7 @@ sealed class FetchNotesCubitState {}
 class FetchNotesCubitInitial extends FetchNotesCubitState {}
 
 
+class FetchNotesCubitSuccess extends FetchNotesCubitState {
+
+}
+
