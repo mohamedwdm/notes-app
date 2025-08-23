@@ -13,29 +13,34 @@ class AddNoteBottomSheet extends StatelessWidget {
     return BlocProvider(
       create: (context) => AddNoteCubit(),
       child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 16.0),
-          child: BlocConsumer<AddNoteCubit, AddNoteState>(
-            listener: (context, state) {
-              if (state is AddNoteSuccess) {
-                Navigator.pop(context);
-                  BlocProvider.of<FetchNotesCubitCubit>(
-                    context,
-                  ).fetchAllNotes();                
-              } else if (state is AddNoteFiluer) {
-                print('Failure ${state.messege}');
-              }
-            },
-            builder: (context, state) {
-              return AbsorbPointer(
-                // to avoid clicking on any thing while loading
-                absorbing: state is AddNoteLoading ? true : false,
-                child: Padding(
-                  padding:  EdgeInsets.only(left: 16.0 , right: 16 , bottom: MediaQuery.of(context).viewInsets.bottom),
-                  child: SingleChildScrollView(child: AddNoteForm()),
-                ));
-            },
-          ),
+        padding: const EdgeInsets.symmetric(horizontal: 16.0),
+        child: BlocConsumer<AddNoteCubit, AddNoteState>(
+          listener: (context, state) {
+            if (state is AddNoteSuccess) {
+              Navigator.pop(context);
+              BlocProvider.of<FetchNotesCubitCubit>(
+                context,
+              ).fetchAllNotes();
+            } else if (state is AddNoteFiluer) {
+              print('Failure ${state.messege}');
+            }
+          },
+          builder: (context, state) {
+            return AbsorbPointer(
+              // to avoid clicking on any thing while loading
+              absorbing: state is AddNoteLoading ? true : false,
+              child: Padding(
+                padding: EdgeInsets.only(
+                  left: 16.0,
+                  right: 16,
+                  bottom: MediaQuery.of(context).viewInsets.bottom,
+                ),
+                child: SingleChildScrollView(child: AddNoteForm()),
+              ),
+            );
+          },
         ),
+      ),
     );
   }
 }
