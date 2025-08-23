@@ -30,10 +30,10 @@ class _EditViewBodyState extends State<EditViewBody> {
               widget.note.title = title ?? widget.note.title;
               widget.note.subtitle = content ?? widget.note.subtitle;
               widget.note.save();
-              Navigator.pop(context);
               BlocProvider.of<FetchNotesCubitCubit>(
                 context,
               ).fetchAllNotes();
+              Navigator.pop(context);
             },
           ),
           SizedBox(height: 40),
