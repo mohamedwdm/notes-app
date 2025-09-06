@@ -27,7 +27,7 @@ class _EditViewBodyState extends State<EditViewBody> {
           SizedBox(height: 40),
           CustomAppBar(
             icon: Icons.check,
-            title: 'Edit',
+            title: 'Edit Note',
             onPressed: () {
               widget.note.title = title ?? widget.note.title;
               widget.note.subtitle = content ?? widget.note.subtitle;
