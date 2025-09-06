@@ -5,6 +5,7 @@ import 'package:notes_app/models/notes_model.dart';
 import 'package:notes_app/widgets/custm_textfield.dart';
 import 'package:notes_app/widgets/custom_appbar.dart';
 import 'package:notes_app/widgets/edit_note_color_list.dart';
+import 'package:notes_app/widgets/show_snackbar.dart';
 
 class EditViewBody extends StatefulWidget {
   const EditViewBody({super.key, required this.note});
@@ -35,6 +36,7 @@ class _EditViewBodyState extends State<EditViewBody> {
                 context,
               ).fetchAllNotes();
               Navigator.pop(context);
+              ShowSnackBar(context, "Edited Successfully");
             },
           ),
           SizedBox(height: 40),

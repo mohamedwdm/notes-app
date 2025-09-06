@@ -6,6 +6,7 @@ import 'package:notes_app/models/notes_model.dart';
 import 'package:notes_app/widgets/colors_list_view.dart';
 import 'package:notes_app/widgets/custm_textfield.dart';
 import 'package:notes_app/widgets/custom_button.dart';
+import 'package:notes_app/widgets/show_snackbar.dart';
 
 
 class AddNoteForm extends StatefulWidget {
@@ -65,6 +66,7 @@ class _AddNoteFormState extends State<AddNoteForm> {
                     BlocProvider.of<AddNoteCubit>(
                       context,
                     ).addNote(note);
+                    ShowSnackBar(context, "Add Note Successfully");
                   } else {
                     autovalidateMode = AutovalidateMode.always;
                     setState(() {});
