@@ -6,9 +6,9 @@ class CustomTextField extends StatelessWidget {
     super.key,
     required this.hintText,
     this.maxLine = 1,
-    this.onSaved, this.onChanged,
+    this.onSaved, this.onChanged,this.initialValue,
   });
-
+  final String? initialValue;
   final String hintText;
   final int maxLine;
   final Function(String?)? onSaved;
@@ -24,6 +24,7 @@ class CustomTextField extends StatelessWidget {
           return null;
         }
       },
+      initialValue: initialValue,
       onChanged: onChanged,
       onSaved: onSaved,
       maxLines: maxLine,

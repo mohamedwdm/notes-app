@@ -29,9 +29,20 @@ class _EditViewBodyState extends State<EditViewBody> {
             icon: Icons.check,
             title: 'Edit Note',
             onPressed: () {
-              widget.note.title = title ?? widget.note.title;
-              widget.note.subtitle = content ?? widget.note.subtitle;
+              final oldTitle = widget.note.title;
+              final oldSubtitle = widget.note.subtitle;
+              final newTitle = title ?? oldTitle;
+              final newSubtitle = content ?? oldSubtitle;
+              if (newTitle == oldTitle &&
+                  newSubtitle == oldSubtitle) {
+                Navigator.pop(context);
+                ShowSnackBar(context, "No changes made");
+                return;
+              }
+              widget.note.title = newTitle;
+              widget.note.subtitle = newSubtitle;
               widget.note.save();
+
               BlocProvider.of<FetchNotesCubitCubit>(
                 context,
               ).fetchAllNotes();
@@ -42,6 +53,7 @@ class _EditViewBodyState extends State<EditViewBody> {
           SizedBox(height: 40),
           CustomTextField(
             hintText: widget.note.title,
+            initialValue: widget.note.title,
             onChanged: (value) {
               title = value;
             },
@@ -49,6 +61,7 @@ class _EditViewBodyState extends State<EditViewBody> {
           SizedBox(height: 15),
           CustomTextField(
             hintText: widget.note.subtitle,
+            initialValue: widget.note.subtitle,
             maxLine: 5,
             onChanged: (value) {
               content = value;
