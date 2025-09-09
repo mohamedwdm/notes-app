@@ -18,6 +18,15 @@ class EditViewBody extends StatefulWidget {
 
 class _EditViewBodyState extends State<EditViewBody> {
   String? title, content;
+  late int selectedColor;
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    selectedColor =
+        widget.note.color; // start with note's current color
+  }
+
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -31,23 +40,56 @@ class _EditViewBodyState extends State<EditViewBody> {
             onPressed: () {
               final oldTitle = widget.note.title;
               final oldSubtitle = widget.note.subtitle;
+              final oldColor = widget.note.color;
               final newTitle = title ?? oldTitle;
               final newSubtitle = content ?? oldSubtitle;
+              final newColor = selectedColor;
+
               if (newTitle == oldTitle &&
-                  newSubtitle == oldSubtitle) {
+                  newSubtitle == oldSubtitle &&
+                  newColor == oldColor) {
                 Navigator.pop(context);
                 ShowSnackBar(context, "No changes made");
                 return;
               }
-              widget.note.title = newTitle;
-              widget.note.subtitle = newSubtitle;
-              widget.note.save();
 
-              BlocProvider.of<FetchNotesCubitCubit>(
-                context,
-              ).fetchAllNotes();
-              Navigator.pop(context);
-              ShowSnackBar(context, "Edited Successfully");
+              showDialog(
+                context: context,
+                builder:
+                    (context) => AlertDialog(
+                      title: Text("Confirm Edit"),
+                      content: Text(
+                        "Are you sure want to save the changes?",
+                      ),
+                      actions: [
+                        TextButton(
+                          onPressed:
+                              () => Navigator.pop(context), // cancel
+                          child: Text("Cancel"),
+                        ),
+                        TextButton(
+                          onPressed: () {
+                            widget.note.title = newTitle;
+                            widget.note.subtitle = newSubtitle;
+                            widget.note.save();
+
+                            BlocProvider.of<FetchNotesCubitCubit>(
+                              context,
+                            ).fetchAllNotes();
+                            Navigator.pop(context); // close dialog
+                            Navigator.pop(
+                              context,
+                            ); // close edit screen
+                            ShowSnackBar(
+                              context,
+                              "Edited Successfully",
+                            );
+                          },
+                          child: Text("Save"),
+                        ),
+                      ],
+                    ),
+              );
             },
           ),
           SizedBox(height: 40),

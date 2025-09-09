@@ -13,7 +13,6 @@ class NotesItem extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        //Navigator.pushNamed(context, EditNoteView.id);
         Navigator.push(
           context,
           MaterialPageRoute(
@@ -54,10 +53,39 @@ class NotesItem extends StatelessWidget {
               ),
               trailing: IconButton(
                 onPressed: () {
-                  note.delete();
-                  BlocProvider.of<FetchNotesCubitCubit>(
-                    context,
-                  ).fetchAllNotes();
+                  showDialog(
+                    context: context,
+                    builder:
+                        (context) => AlertDialog(
+                          title: Text("Confirm Delete"),
+                          content: Text(
+                            "Are you sure you want to delete this note?",
+                          ),
+                          actions: [
+                            TextButton(
+                              onPressed: () => Navigator.pop(context),
+                              child: Text("Cancel"),
+                            ),
+                            TextButton(
+                              onPressed: () {
+                                note.delete();
+                                BlocProvider.of<FetchNotesCubitCubit>(
+                                  context,
+                                ).fetchAllNotes();
+                                Navigator.pop(
+                                  context,
+                                ); // close dialog
+                              },
+                              child: Text(
+                                "Delete",
+                                style: TextStyle(
+                                  color: Colors.red[700],
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                  );
                 },
                 icon: Icon(Icons.delete, size: 24),
                 color: Colors.black,
