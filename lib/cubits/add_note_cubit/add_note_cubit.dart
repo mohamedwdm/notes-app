@@ -23,4 +23,6 @@ class AddNoteCubit extends Cubit<AddNoteState> {
       emit(AddNoteFiluer(messege: e.toString()));
     }
   }
+
+
 }
