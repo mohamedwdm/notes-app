@@ -66,7 +66,7 @@ class _AddNoteFormState extends State<AddNoteForm> {
                     BlocProvider.of<AddNoteCubit>(
                       context,
                     ).addNote(note);
-                    ShowSnackBar(context, "Add Note Successfully");
+                    ShowSnackBar(context, message: "Add Note Successfully");
                   } else {
                     autovalidateMode = AutovalidateMode.always;
                     setState(() {});

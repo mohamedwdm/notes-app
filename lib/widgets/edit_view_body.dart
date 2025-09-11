@@ -49,7 +49,7 @@ class _EditViewBodyState extends State<EditViewBody> {
                   newSubtitle == oldSubtitle &&
                   newColor == oldColor) {
                 Navigator.pop(context);
-                ShowSnackBar(context, "No changes made");
+                ShowSnackBar(context,message:  "No changes made");
                 return;
               }
 
@@ -82,7 +82,7 @@ class _EditViewBodyState extends State<EditViewBody> {
                             ); // close edit screen
                             ShowSnackBar(
                               context,
-                              "Edited Successfully",
+                             message:  "Edited Successfully",
                             );
                           },
                           child: Text("Save"),

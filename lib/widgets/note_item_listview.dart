@@ -5,6 +5,7 @@ import 'package:notes_app/constants.dart';
 import 'package:notes_app/cubits/fetch_notes_cubit/fetch_notes_cubit_cubit.dart';
 import 'package:notes_app/models/notes_model.dart';
 import 'package:notes_app/widgets/custom_note_item.dart';
+import 'package:notes_app/widgets/show_snackbar.dart';
 
 class NoteItemListView extends StatelessWidget {
   const NoteItemListView({super.key});
@@ -25,7 +26,7 @@ class NoteItemListView extends StatelessWidget {
 
               return Padding(
                 padding: const EdgeInsets.symmetric(vertical: 4.0),
-                // Swipe to delete 
+                // Swipe to delete
                 child: Dismissible(
                   key: ValueKey(note.key), // Hive note has unique key
                   direction: DismissDirection.endToStart,
@@ -44,19 +45,12 @@ class NoteItemListView extends StatelessWidget {
                     BlocProvider.of<FetchNotesCubitCubit>(context).fetchAllNotes();
 
                     // Snackbar with Undo
-                    ScaffoldMessenger.of(context).showSnackBar(
-                      SnackBar(
-                        content: const Text("Note deleted"),
-                        action: SnackBarAction(
-                          label: "Undo",
-                          onPressed: () async {
-                            final notesBox = Hive.box<NotesModel>(kNotesBox);
-                            await notesBox.put(deletedKey, deletedNote);
-                            BlocProvider.of<FetchNotesCubitCubit>(context).fetchAllNotes();
-                          },
-                        ),
-                      ),
-                    );
+
+                    ShowSnackBar(context,message:  "Note deleted",label:"Undo", onPressed: () async {
+                      final notesBox = Hive.box<NotesModel>(kNotesBox);
+                      await notesBox.put(deletedKey, deletedNote);
+                      BlocProvider.of<FetchNotesCubitCubit>(context).fetchAllNotes();
+                    });
                   },
 
                   child: NotesItem(note: note),
