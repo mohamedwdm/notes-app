@@ -22,12 +22,12 @@ class _AddNoteFormState extends State<AddNoteForm> {
   String? title, subtitle;
   @override
   Widget build(BuildContext context) {
-    return Form(
+    return  Form(
       key: formKey,
       autovalidateMode: autovalidateMode,
-      child: Column(
+      child:  Column(
         children: [
-          SizedBox(height: 32),
+        const  SizedBox(height: 32),
 
           CustomTextField(
             hintText: 'title',
@@ -43,9 +43,9 @@ class _AddNoteFormState extends State<AddNoteForm> {
               subtitle = value;
             },
           ),
-          SizedBox(height: 20),
+          const SizedBox(height: 20),
           ColorsListView(),
-          SizedBox(height: 20),
+         const  SizedBox(height: 20),
 
           BlocBuilder<AddNoteCubit, AddNoteState>(
             builder: (context, state) {
@@ -55,7 +55,7 @@ class _AddNoteFormState extends State<AddNoteForm> {
                   if (formKey.currentState!.validate()) {
                     formKey.currentState!.save();
                     var currentDate = DateTime.now();
-                    var formattedCurrentDate = DateFormat('dd-mm-yyyy')
+                    var formattedCurrentDate = DateFormat('dd-MM-yyyy')
                         .format(currentDate);
                     var note = NotesModel(
                       title: title!,
@@ -75,7 +75,7 @@ class _AddNoteFormState extends State<AddNoteForm> {
               );
             },
           ),
-          SizedBox(height: 30),
+        const  SizedBox(height: 30),
         ],
       ),
     );

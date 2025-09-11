@@ -21,7 +21,6 @@ class _EditViewBodyState extends State<EditViewBody> {
   late int selectedColor;
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     selectedColor =
         widget.note.color; // start with note's current color
@@ -49,7 +48,7 @@ class _EditViewBodyState extends State<EditViewBody> {
                   newSubtitle == oldSubtitle &&
                   newColor == oldColor) {
                 Navigator.pop(context);
-                ShowSnackBar(context,message:  "No changes made");
+                ShowSnackBar(context,message:  "No changes have occurred.");
                 return;
               }
 
@@ -57,15 +56,15 @@ class _EditViewBodyState extends State<EditViewBody> {
                 context: context,
                 builder:
                     (context) => AlertDialog(
-                      title: Text("Confirm Edit"),
-                      content: Text(
+                      title: const Text("Confirm Edit"),
+                      content: const Text(
                         "Are you sure want to save the changes?",
                       ),
                       actions: [
                         TextButton(
                           onPressed:
                               () => Navigator.pop(context), // cancel
-                          child: Text("Cancel"),
+                          child: const Text("Cancel"),
                         ),
                         TextButton(
                           onPressed: () {
@@ -85,14 +84,14 @@ class _EditViewBodyState extends State<EditViewBody> {
                              message:  "Edited Successfully",
                             );
                           },
-                          child: Text("Save"),
+                          child: const Text("Save"),
                         ),
                       ],
                     ),
               );
             },
           ),
-          SizedBox(height: 40),
+          const SizedBox(height: 40),
           CustomTextField(
             hintText: widget.note.title,
             initialValue: widget.note.title,
@@ -100,7 +99,7 @@ class _EditViewBodyState extends State<EditViewBody> {
               title = value;
             },
           ),
-          SizedBox(height: 15),
+          const SizedBox(height: 15),
           CustomTextField(
             hintText: widget.note.subtitle,
             initialValue: widget.note.subtitle,
@@ -109,7 +108,7 @@ class _EditViewBodyState extends State<EditViewBody> {
               content = value;
             },
           ),
-          SizedBox(height: 15),
+         const SizedBox(height: 15),
           EditNoteColorsList(note: widget.note),
         ],
       ),
